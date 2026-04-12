@@ -1,75 +1,104 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, Phone, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, MapPin } from "lucide-react";
 
 const Contact = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding section-alt">
       <div className="section-container">
-        <div className="text-center mb-12">
-          <p className="text-primary font-medium text-sm mb-2 uppercase tracking-wide">Get In Touch</p>
-          <h2 className="section-title">Contact</h2>
-        </div>
+        <h2 className="section-title">Contact Me</h2>
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+          className="grid md:grid-cols-5 gap-6"
         >
           {/* Info */}
-          <div className="space-y-5">
-            <a href="mailto:nabilabinteayub@gmail.com" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                <Mail size={16} className="text-primary" />
+          <div className="md:col-span-2 card-base">
+            <h3 className="font-heading font-semibold text-foreground mb-5">Contact Information</h3>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Mail size={15} className="text-primary mt-0.5" />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">Email</p>
+                  <a href="mailto:nabilabinteayub@gmail.com" className="text-xs text-primary hover:underline">nabilabinteayub@gmail.com</a>
+                </div>
               </div>
-              nabilabinteayub@gmail.com
-            </a>
-            <a href="https://wa.me/8801776290946" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                <Phone size={16} className="text-primary" />
+              <div className="flex items-start gap-3">
+                <MapPin size={15} className="text-primary mt-0.5" />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">Location</p>
+                  <p className="text-xs text-muted-foreground">Dhaka, Bangladesh</p>
+                </div>
               </div>
-              +880 1776 290946
-            </a>
-            <a href="#" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                <Linkedin size={16} className="text-primary" />
+              <div className="flex items-start gap-3">
+                <Linkedin size={15} className="text-primary mt-0.5" />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">LinkedIn</p>
+                  <a href="https://linkedin.com/in/nabilabinteayub" target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">in/nabilabinteayub</a>
+                </div>
               </div>
-              LinkedIn Profile
-            </a>
+              <div className="flex items-start gap-3">
+                <Phone size={15} className="text-primary mt-0.5" />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">WhatsApp</p>
+                  <a href="https://wa.me/8801776290946" target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">+880 1776 290946</a>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Form */}
-          <div className="bg-card rounded-2xl p-6 border border-border">
-            <div className="space-y-4">
+          <div className="md:col-span-3 card-base">
+            <h3 className="font-heading font-semibold text-foreground mb-4">Send Me a Message</h3>
+            <div className="grid grid-cols-2 gap-3 mb-3">
+              <div>
+                <label className="text-xs font-medium text-foreground mb-1 block">Name</label>
+                <input
+                  placeholder="Your name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full px-3 py-2 rounded-md bg-background border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/40"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-foreground mb-1 block">Email</label>
+                <input
+                  placeholder="Your email address"
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full px-3 py-2 rounded-md bg-background border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/40"
+                />
+              </div>
+            </div>
+            <div className="mb-3">
+              <label className="text-xs font-medium text-foreground mb-1 block">Subject</label>
               <input
-                placeholder="Your Name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+                placeholder="Message subject"
+                value={form.subject}
+                onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                className="w-full px-3 py-2 rounded-md bg-background border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/40"
               />
-              <input
-                placeholder="Your Email"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
-              />
+            </div>
+            <div className="mb-4">
+              <label className="text-xs font-medium text-foreground mb-1 block">Message</label>
               <textarea
-                placeholder="Your Message"
+                placeholder="Your message"
                 rows={4}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition resize-none"
+                className="w-full px-3 py-2 rounded-md bg-background border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/40 resize-none"
               />
-              <button className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:shadow-lg hover:shadow-primary/25 transition-all duration-300">
-                <Send size={16} /> Send Message
-              </button>
             </div>
+            <button className="w-full px-5 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
+              Send Message
+            </button>
           </div>
         </motion.div>
       </div>
