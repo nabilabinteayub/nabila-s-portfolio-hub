@@ -13,7 +13,7 @@ const events = [
   },
   {
     title: "BEAR Summit & Bangladesh National Semiconductor Symposium 2025",
-    detail: 'Presented e-Poster: "PVDoc: An AI-Powered Smartphone-Based Virtual Tool for Parkinson's Disease Identification and Monitoring in Low-Resource Settings."',
+    detail: "Presented e-Poster: \"PVDoc: An AI-Powered Smartphone-Based Virtual Tool for Parkinson's Disease Identification and Monitoring in Low-Resource Settings.\"",
   },
 ];
 
