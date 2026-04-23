@@ -18,6 +18,7 @@ const projects = [
     icon: Landmark,
     title: "Grant-Funded Initiatives",
     desc: "Managing multi-stakeholder projects funded by international donors including ILO, DGHS — ensuring compliance, impact measurement, and sustainability.",
+    url: "https://www.ilo.org/publications/guidelines-establish-model-enterprise-clinics-rmg-industries-bangladesh",
   },
 ];
 
@@ -30,7 +31,7 @@ const Projects = () => {
       <div className="section-container">
         <h2 className="section-title">Selected Projects</h2>
         <div ref={ref} className="grid md:grid-cols-2 gap-5">
-          {projects.map(({ icon: Icon, title, desc }, i) => (
+          {projects.map(({ icon: Icon, title, desc, url }, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 15 }}
@@ -43,9 +44,20 @@ const Projects = () => {
               </div>
               <h3 className="font-heading font-semibold text-primary text-base mb-1 hover:underline cursor-default">{title}</h3>
               <p className="text-xs text-muted-foreground leading-relaxed mb-3">{desc}</p>
-              <span className="inline-flex items-center gap-1 text-xs text-primary font-medium cursor-default">
-                Learn more <ArrowRight size={12} />
-              </span>
+              {url ? (
+                <a 
+                  href={url} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-xs text-primary font-medium hover:underline"
+                >
+                  Learn more <ArrowRight size={12} />
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-1 text-xs text-primary font-medium cursor-default">
+                  Learn more <ArrowRight size={12} />
+                </span>
+              )}
             </motion.div>
           ))}
         </div>
