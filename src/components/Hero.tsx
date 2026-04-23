@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ClipboardList, Briefcase, Users, BarChart3 } from "lucide-react";
+import { ArrowRight, ClipboardList, Briefcase, Users, FileText } from "lucide-react";
 
 const expertiseItems = [
   { icon: ClipboardList, label: "Project Coordination" },
   { icon: Briefcase, label: "Grant Management" },
   { icon: Users, label: "Stakeholder Engagement" },
-  { icon: BarChart3, label: "Data Analysis" },
+  { icon: FileText, label: "Proposal Development" },
 ];
 
 const Hero = () => (
