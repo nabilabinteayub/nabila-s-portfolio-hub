@@ -7,24 +7,33 @@ const Contact = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+
     const formElement = e.currentTarget;
     const formData = new FormData(formElement);
-    
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString(),
-    })
-      .then(() => {
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (response.ok) {
         setSubmitted(true);
         setForm({ name: "", email: "", subject: "", message: "" });
         formElement.reset();
         setTimeout(() => setSubmitted(false), 5000);
-      })
-      .catch((error) => console.error("Form submission error:", error));
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,18 +88,21 @@ const Contact = () => {
             
             {submitted && (
               <div className="mb-4 p-3 rounded-md bg-green-50 border border-green-200 text-green-800 text-xs font-medium">
-                ✓ Thank you! Your message has been sent successfully.
+                ✓ Thank you! Your message has been sent successfully. I'll get back to you soon.
               </div>
             )}
 
             <form 
-              name="contact" 
-              method="POST" 
-              netlify
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="space-y-3"
             >
-              {/* Spam protection */}
+              <input type="hidden" name="form-name" value="contact" />
+
+              {/* Spam protection honeypot */}
               <p hidden>
                 <input name="bot-field" type="text" />
               </p>
@@ -148,10 +160,11 @@ const Contact = () => {
               </div>
 
               <button 
-                type="submit" 
-                className="w-full px-5 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                type="submit"
+                disabled={loading}
+                className="w-full px-5 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
