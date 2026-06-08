@@ -21,7 +21,7 @@ const Hero = () => (
         >
           <div className="w-52 h-52 md:w-56 md:h-56 rounded-2xl overflow-hidden border-[3px] border-primary/50 shadow-md bg-muted">
             <img
-              src="https://i.ibb.co.com/F4wVCc1D/Nabila-Apu.png"
+              src="https://i.ibb.co.com/CK0TcVNB/Nabila.jpg"
               alt="Nabila Binte Ayub"
               className="w-full h-full object-cover"
             />
